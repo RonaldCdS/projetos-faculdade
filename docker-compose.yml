@@ -1,0 +1,18 @@
+services:
+  
+  db:
+    image: mongo:latest
+    container_name: meu_mongo
+    ports:
+      - "27017:27017"
+
+  
+  api:
+    build: .
+    container_name: minha_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - MONGO_URI=mongodb://db:27017/
